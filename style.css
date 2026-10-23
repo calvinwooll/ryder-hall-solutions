@@ -1,0 +1,995 @@
+/* =============================================================
+   Shared stylesheet. All three pages use this one file.
+
+   Want different colors? Change the values in :root below
+   and every page updates at once.
+   ============================================================= */
+
+:root {
+  /* Colors */
+  --color-dark: #1b2a41;            /* deep navy: top banners, footer, headings */
+  --color-primary: #1f5f74;         /* deep teal: buttons, links, icons */
+  --color-primary-hover: #174a5a;   /* darker teal for hover */
+  --color-accent: #d4913a;          /* warm amber: highlights */
+  --color-accent-hover: #e0a457;    /* lighter amber for hover */
+  --color-accent-text: #8f5a12;     /* darker amber for small text on light backgrounds */
+  --color-accent-light: #f6ead8;    /* pale amber: soft backgrounds */
+  --color-bg: #f8f5ef;              /* warm off-white page background */
+  --color-surface: #ffffff;         /* cards and white sections */
+  --color-text: #26303d;            /* main text */
+  --color-text-muted: #5a6474;      /* secondary text */
+  --color-border: #e5ded2;          /* thin lines */
+
+  /* Fonts */
+  --font-heading: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Layout */
+  --max-width: 1120px;
+  --gutter: 1rem;                   /* space at the left and right edges of the screen */
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(27, 42, 65, 0.05), 0 10px 30px rgba(27, 42, 65, 0.07);
+}
+
+@media (min-width: 640px) {
+  :root { --gutter: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  :root { --gutter: 2rem; }
+}
+
+
+/* ---------- Basics ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.5em;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-dark);
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--color-primary);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--max-width));
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: absolute;
+  top: -10rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  background: var(--color-dark);
+  color: #fff;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  color: #fff;
+}
+
+/* Hidden on screen, still read aloud by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ---------- Header and navigation ---------- */
+
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 0.9rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* The logo (images/logo.svg) */
+.brand img {
+  width: auto;
+  height: 2.75rem;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  display: block;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav a:hover {
+  background: var(--color-accent-light);
+  color: var(--color-dark);
+}
+
+/* The page you're on */
+.site-nav a[aria-current="page"] {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+/* Keep the menu visible while scrolling on bigger screens */
+@media (min-width: 768px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+}
+
+
+/* ---------- Buttons ---------- */
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.button svg {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.button-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.button-primary:hover {
+  background: var(--color-primary-hover);
+  color: #fff;
+}
+
+.button-accent {
+  background: var(--color-accent);
+  color: var(--color-dark);
+}
+
+.button-accent:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-dark);
+}
+
+.button-outline {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.button-outline:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.button-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.button-outline-light:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Full-width buttons on small phones */
+@media (max-width: 479px) {
+  .button-row .button {
+    width: 100%;
+  }
+}
+
+
+/* ---------- Small labels above headings ---------- */
+
+.eyebrow {
+  margin-bottom: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.eyebrow-dark {
+  color: var(--color-accent-text);
+}
+
+.lead {
+  font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
+  line-height: 1.55;
+}
+
+
+/* ---------- Home page banner ---------- */
+
+.hero {
+  padding-block: clamp(3.5rem, 2rem + 6vw, 6.5rem);
+  background:
+    radial-gradient(circle at 85% 15%, rgba(212, 145, 58, 0.16), transparent 45%),
+    var(--color-dark);
+  color: #d9dfe7;
+}
+
+.hero-inner {
+  display: grid;
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero h1 {
+  margin-bottom: 0.2em;
+  font-size: clamp(2.6rem, 1.6rem + 4.2vw, 4.5rem);
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+
+.tagline {
+  margin-bottom: 1.25rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.8rem);
+  font-style: italic;
+  line-height: 1.35;
+  color: #f2d6ab;
+}
+
+.hero-intro {
+  max-width: 34rem;
+  font-size: clamp(1.05rem, 1rem + 0.35vw, 1.3rem);
+}
+
+.hero-art {
+  display: none;
+}
+
+.hero-float {
+  max-width: 460px;
+  margin-left: auto;
+}
+
+@media (min-width: 900px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  }
+
+  .hero-art {
+    display: block;
+  }
+}
+
+
+/* ---------- Banner at the top of the other pages ---------- */
+
+.page-hero {
+  padding-block: clamp(3rem, 2rem + 4vw, 5rem);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(212, 145, 58, 0.16), transparent 40%),
+    var(--color-dark);
+  color: #d0d8e2;
+}
+
+.page-hero h1 {
+  margin-bottom: 0.35em;
+  font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
+  color: #fff;
+}
+
+.page-hero .lead {
+  max-width: 44rem;
+  margin: 0;
+}
+
+
+/* ---------- Page sections ---------- */
+
+.section {
+  padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
+}
+
+.section-white {
+  background: var(--color-surface);
+  border-block: 1px solid var(--color-border);
+}
+
+.section-heading {
+  max-width: 44rem;
+  margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem);
+}
+
+.section-heading.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-heading .lead {
+  margin-bottom: 0;
+  color: var(--color-text-muted);
+}
+
+/* Heading on the left, text on the right (on wide screens) */
+.split {
+  display: grid;
+  gap: 0.5rem 4rem;
+}
+
+.split .prose {
+  max-width: 40rem;
+}
+
+.split .prose p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 860px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr);
+  }
+}
+
+
+/* ---------- Cards ---------- */
+
+.card {
+  padding: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.icon-badge {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.25rem;
+  border-radius: 12px;
+  background: var(--color-accent-light);
+  color: var(--color-primary);
+}
+
+.icon-badge svg {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+
+/* ---------- Home: the two key ideas ---------- */
+
+.concept-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .concept-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.example {
+  margin-top: 1.5rem;
+  padding: 1.1rem 1.25rem;
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--color-bg);
+}
+
+.example-label {
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.example p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ---------- Call-to-action box ---------- */
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  padding: clamp(1.75rem, 1.25rem + 2vw, 3rem);
+  border: 1px solid #ecdcc2;
+  border-radius: var(--radius);
+  background: var(--color-accent-light);
+}
+
+.cta h2 {
+  margin-bottom: 0.3rem;
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+}
+
+.cta p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.cta .button-row {
+  margin-top: 0;
+}
+
+
+/* ---------- What We Do: services ---------- */
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+}
+
+.service-card h2 {
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.25rem, 1.15rem + 0.4vw, 1.45rem);
+}
+
+.service-card p {
+  margin: 0;
+}
+
+/* Numbered "How we work" steps */
+.steps {
+  display: grid;
+  gap: 2rem;
+  margin: 0 0 clamp(2.5rem, 2rem + 2vw, 4rem);
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.steps li {
+  position: relative;
+  padding-top: 3.75rem;
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-dark);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.steps h3 {
+  margin-bottom: 0.4rem;
+}
+
+.steps p {
+  margin: 0;
+}
+
+
+/* ---------- Our Team ---------- */
+
+/* Phones: one card per row, photo on the left */
+.team-grid {
+  --cols: 1;
+  --gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+}
+
+.team-card {
+  display: flex;
+  flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.team-photo {
+  flex: none;
+  width: 6.5rem;
+  height: auto;
+  min-height: 6.5rem;
+  object-fit: cover;
+  object-position: center 30%;
+  background: #e4e9ef;
+}
+
+.team-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem 1.1rem;
+}
+
+.team-dept {
+  margin-bottom: 0.7rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: var(--color-accent-light);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--color-accent-text);
+}
+
+.team-name {
+  margin-bottom: 0.2rem;
+  font-size: 1.3rem;
+}
+
+.team-title {
+  margin: 0;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+/* Bigger screens: photo on top, several cards per row */
+@media (min-width: 560px) {
+  .team-grid {
+    --cols: 2;
+    --gap: 1.5rem;
+  }
+
+  .team-card {
+    flex-direction: column;
+  }
+
+  .team-photo {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+  }
+
+  .team-card-body {
+    justify-content: flex-start;
+    padding: 1.1rem 1.15rem 1.35rem;
+  }
+}
+
+@media (min-width: 700px) {
+  .team-grid { --cols: 3; }
+}
+
+@media (min-width: 1000px) {
+  .team-grid { --cols: 4; }
+}
+
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  padding-block: 3.5rem 2rem;
+  background: var(--color-dark);
+  color: #cdd5df;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+}
+
+.footer-brand {
+  margin-bottom: 1rem;
+}
+
+/* The white version of the logo (images/logo-white.svg) */
+.footer-brand img {
+  width: auto;
+  height: 3rem;
+}
+
+.footer-heading {
+  margin-bottom: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.footer-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  list-style: none;
+}
+
+.site-footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.9rem;
+  color: #9aa6b5;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+
+/* =============================================================
+   MOTION (Home page)
+   Everything below is decoration. If a browser can't do one of
+   these effects, or a visitor has asked their device for less
+   motion, they simply see the finished page.
+   ============================================================= */
+
+/* A number the circle animations count from 1 (apart) to 0 (overlapping) */
+@property --t {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+/* Things that slide in from the side never cause sideways scrolling */
+main {
+  overflow-x: clip;
+}
+
+
+/* ---------- Top banner: drifting glow and text that rises in ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 70% 30%, rgba(212, 145, 58, 0.22), transparent 35%),
+    radial-gradient(circle at 25% 75%, rgba(42, 122, 145, 0.32), transparent 40%);
+  animation: drift 20s ease-in-out infinite alternate;
+}
+
+.hero-text > * {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-text > :nth-child(2) { animation-delay: 0.1s; }
+.hero-text > :nth-child(3) { animation-delay: 0.2s; }
+.hero-text > :nth-child(4) { animation-delay: 0.3s; }
+.hero-text > :nth-child(5) { animation-delay: 0.4s; }
+
+
+/* ---------- The logo circles ---------- */
+
+.merge {
+  --r: 18%;                  /* circle size: radius as a share of the graphic's width */
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+  container-type: inline-size;
+}
+
+.merge-circle {
+  position: absolute;
+  top: 50%;
+  width: calc(var(--r) * 2);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+}
+
+/* --t = 1: circles apart.  --t = 0: overlapping, like the logo. */
+.merge-left,
+.merge-lens {
+  left: calc(50% - var(--r) * (0.45 + 1.15 * var(--t, 0)));
+}
+
+.merge-right {
+  left: calc(50% + var(--r) * (0.45 + 1.15 * var(--t, 0)));
+}
+
+.merge-left  { background: var(--color-dark); }
+.merge-right { background: var(--color-accent); }
+
+/* The overlap: a teal copy of the left circle, trimmed to where it meets the right one */
+.merge-lens {
+  background: #2a7a91;
+  clip-path: circle(50% at calc((95 + 115 * var(--t, 0)) * 1%) 50%);
+}
+
+.merge-label {
+  position: absolute;
+  top: 50%;
+  translate: -50% -50%;
+  font-size: max(0.6rem, 2.3cqw);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.merge-left .merge-label  { left: 22.5%; color: #fff; }
+.merge-right .merge-label { left: 77.5%; color: var(--color-dark); }
+.merge-lens .merge-label  { left: 72.5%; color: #fff; }
+
+/* Banner version: bigger, white instead of navy. Glides together on load, then floats. */
+.merge-hero {
+  --r: 24%;
+  aspect-ratio: 2 / 1;
+  animation: merge-hero 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both;
+}
+
+.merge-hero .merge-left {
+  background: #fff;
+}
+
+.hero-float {
+  animation: float 7s ease-in-out 2s infinite;
+}
+
+.ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--r) * 1.4);
+  aspect-ratio: 1;
+  border: 2px solid rgba(212, 145, 58, 0.6);
+  border-radius: 50%;
+  translate: -50% -50%;
+  opacity: 0;
+  animation: ripple 4.5s ease-out 1.6s infinite;
+}
+
+.ripple:nth-child(2) { animation-delay: 3.1s; }
+.ripple:nth-child(3) { animation-delay: 4.6s; }
+
+/* "Our logo, explained" section */
+.merge-scroll {
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.shared-caption {
+  max-width: 34rem;
+  margin: clamp(1.5rem, 1rem + 2vw, 2.5rem) auto 0;
+  font-size: clamp(1.1rem, 1rem + 0.4vw, 1.3rem);
+  line-height: 1.55;
+  text-align: center;
+}
+
+.shared-caption strong {
+  color: var(--color-primary);
+}
+
+
+/* ---------- Effects tied to scrolling ---------- */
+
+.scroll-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  /* Progress bar along the top */
+  .scroll-progress {
+    display: block;
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 20;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent), #2a7a91);
+    transform-origin: 0 50%;
+    animation: progress linear both;
+    animation-timeline: scroll(root);
+  }
+
+  /* The banner logo drifts down and fades as you scroll past it */
+  .hero-art {
+    animation: hero-parallax linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 80vh;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  /* Sections rise into place as they come into view */
+  .reveal {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 75%;
+  }
+
+  /* The logo circles slide together as you scroll to them */
+  .merge-scroll {
+    view-timeline-name: --merge;
+    animation: merge-scroll linear both;
+    animation-timeline: --merge;
+    animation-range: entry 25% cover 50%;
+  }
+
+  .merge-scroll .merge-lens .merge-label {
+    animation: fade-in linear both;
+    animation-timeline: --merge;
+    animation-range: cover 40% cover 50%;
+  }
+}
+
+/* On wide screens, the two idea cards slide in from opposite sides */
+@media (min-width: 900px) {
+  @supports (animation-timeline: view()) {
+    .reveal-left  { animation-name: reveal-left; }
+    .reveal-right { animation-name: reveal-right; }
+  }
+}
+
+@keyframes rise          { from { opacity: 0; translate: 0 28px; } }
+@keyframes drift         { to { translate: 6% -4%; rotate: 8deg; } }
+@keyframes float         { 50% { translate: 0 -12px; } }
+@keyframes merge-hero    { from { --t: 0.9; opacity: 0; } 40% { opacity: 1; } to { --t: 0; } }
+@keyframes merge-scroll  { from { --t: 1; } to { --t: 0; } }
+@keyframes ripple        { from { opacity: 0.8; scale: 0.6; } to { opacity: 0; scale: 3; } }
+@keyframes progress      { from { scale: 0 1; } }
+@keyframes hero-parallax { to { translate: 0 25%; opacity: 0.3; } }
+@keyframes reveal        { from { opacity: 0; translate: 0 40px; } }
+@keyframes reveal-left   { from { opacity: 0; translate: -80px 0; } }
+@keyframes reveal-right  { from { opacity: 0; translate: 80px 0; } }
+@keyframes fade-in       { from { opacity: 0; } }
+
+/* Visitors who ask their device for less motion get the finished page, no animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
