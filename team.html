@@ -12,8 +12,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap">
   <link rel="stylesheet" href="style.css">
+  <script src="motion.js" defer></script>
 </head>
 <body>
+  <!-- Thin bar along the top that fills as you scroll -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- ===== HEADER (same on every page) ===== -->
@@ -36,6 +40,8 @@
 
     <!-- ===== TOP BANNER ===== -->
     <section class="page-hero">
+      <!-- Floating circles (decoration) -->
+      <div class="orbs" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
       <div class="container">
         <p class="eyebrow">Our team</p>
         <h1>The people behind the work</h1>
@@ -52,68 +58,75 @@
          REMOVE A PERSON: delete their whole <article> ... </article> block.
     -->
     <section class="section" aria-label="Team members">
-      <div class="container team-grid">
+      <div class="container team-grid stagger">
 
-        <article class="team-card">
+        <article class="team-card lift" data-tilt="6">
           <img class="team-photo" src="images/yunrui-cheng.jpg" alt="Photo of Yunrui Cheng" width="600" height="600">
           <div class="team-card-body">
             <p class="team-dept">Coordinator</p>
             <h2 class="team-name">Yunrui Cheng</h2>
             <p class="team-title">Project Coordinator</p>
+            <p class="team-role">Keeps every department on one plan, timeline, and budget.</p>
           </div>
         </article>
 
-        <article class="team-card">
+        <article class="team-card lift" data-tilt="6">
           <img class="team-photo" src="images/jingyi-zheng.jpg" alt="Photo of Jingyi Zheng" width="600" height="600">
           <div class="team-card-body">
             <p class="team-dept">Short-Term Solutions</p>
             <h2 class="team-name">Jingyi Zheng</h2>
             <p class="team-title">Crisis Communication Consultant</p>
+            <p class="team-role">Leads key messages, all-staff emails, and leadership speeches.</p>
           </div>
         </article>
 
-        <article class="team-card">
+        <article class="team-card lift" data-tilt="6">
           <img class="team-photo" src="images/beatrice-kiernan.jpg" alt="Photo of Beatrice Kiernan" width="600" height="600">
           <div class="team-card-body">
             <p class="team-dept">Long-Term Solutions</p>
             <h2 class="team-name">Beatrice Kiernan</h2>
             <p class="team-title">Organizational Culture Consultant</p>
+            <p class="team-role">Leads newsletters, slogans, and ongoing team programs.</p>
           </div>
         </article>
 
-        <article class="team-card">
+        <article class="team-card lift" data-tilt="6">
           <img class="team-photo" src="images/sophia-dipaolo.jpg" alt="Photo of Sophia DiPaolo" width="600" height="600">
           <div class="team-card-body">
             <p class="team-dept">Upward Networks</p>
             <h2 class="team-name">Sophia DiPaolo</h2>
             <p class="team-title">Employee Voice Specialist</p>
+            <p class="team-role">Designs ways for employees to speak up, and to hear back.</p>
           </div>
         </article>
 
-        <article class="team-card">
+        <article class="team-card lift" data-tilt="6">
           <img class="team-photo" src="images/charlie-ramsey.jpg" alt="Photo of Charlie Ramsey" width="600" height="600">
           <div class="team-card-body">
             <p class="team-dept">Spokesperson</p>
             <h2 class="team-name">Charlie Ramsey</h2>
             <p class="team-title">Director of Communications</p>
+            <p class="team-role">Presents our recommendations and speaks for the team.</p>
           </div>
         </article>
 
-        <article class="team-card">
+        <article class="team-card lift" data-tilt="6">
           <img class="team-photo" src="images/calvin-wooll.jpg" alt="Photo of Calvin Wooll" width="600" height="600">
           <div class="team-card-body">
             <p class="team-dept">Website</p>
             <h2 class="team-name">Calvin Wooll</h2>
             <p class="team-title">Web Designer &amp; Developer</p>
+            <p class="team-role">Designs and builds our websites, including this one.</p>
           </div>
         </article>
 
-        <article class="team-card">
+        <article class="team-card lift" data-tilt="6">
           <img class="team-photo" src="images/ethan-witten.jpg" alt="Photo of Ethan Witten" width="600" height="600">
           <div class="team-card-body">
             <p class="team-dept">Internal Video</p>
             <h2 class="team-name">Ethan Witten</h2>
             <p class="team-title">Video Producer</p>
+            <p class="team-role">Produces internal videos that introduce change to staff.</p>
           </div>
         </article>
 
